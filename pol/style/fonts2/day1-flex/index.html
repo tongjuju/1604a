@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        document.documentElement.style.fontSize = window.innerWidth / 750 * 100 + 'px';
+        //console.log();
+        // console.log(document.documentElement.clientWidth || document.body.clientWidth);
+    </script>
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="header"><span></span>北京<span>编辑</span></header>
+        <nav class="nav">
+            <ul>
+                <li class="active">门票</li>
+                <li>酒店</li>
+                <li>团购</li>
+                <li>景点</li>
+            </ul>
+        </nav>
+        <main class="main">
+            <!--门票-->
+            <div class="active">
+                <div class="search">
+                    <input type="text" data-index="0" data-text="门票">
+                </div>
+                <div class="list">
+
+                </div>
+            </div>
+            <!--酒店-->
+            <div>
+                <div class="search"></div>
+                <div class="list"></div>
+            </div>
+            <!--团购-->
+            <div>
+                <div class="search"></div>
+                <div class="list"></div>
+            </div>
+            <!--景点-->
+            <div>
+                <div class="search"></div>
+                <div class="list"></div>
+            </div>
+        </main>
+    </div>
+    <script src="../jquery/jquery-3.2.1.min.js"></script>
+    <script>
+        $(function() {
+            var data = null;
+            $.ajax({
+                url: "data/data.json?nowtime=" + new Date() * 1,
+                dataType: "json",
+                async: false,
+                success: function(d) {
+                    data = d;
+                }
+            });
+            //点击导航切换数据
+            $('.nav li').on('click', function() {
+                var ind = $(this).index();
+                $(this).addClass('active').siblings().removeClass('active');
+                $('.main>div').eq(ind).addClass('active').siblings().removeClass('active');
+                show($(this).html(), ind, true);
+            });
+            //默认渲染门票页数据
+            show('门票', 0, true);
+            //文本框搜索
+            $('.search input').on('input', function() {
+                show($(this).data('text'), $(this).data('index'), $(this).val());
+            })
+
+            function show(n, i, check) {
+                var arr = null; //符合门票酒店所有的数据
+                if (check === true) { //初始页面和切换页面查找全部数据
+                    arr = data[n];
+                } else {
+                    //console.log(check);
+                    //check 用户输入的内容
+                    //data[n] 数组
+                    arr = data[n].filter(function(v, i) {
+                        return new RegExp(check, "g").test(v.title);
+                    });
+                }
+                var html = "";
+                $.each(arr, function(i, v) {
+                    html += `<dl>
+                        <dt><img src="${v.img}"></dt>
+                        <dd>
+                            <h3>${v.title}</h3>
+                            <span>${v.tag}</span>
+                            <span>已定${v.person}分 ${v.number}分</span>
+                            <p>
+                                <span>${v.newprice}元起</span>
+                                <s>${v.oldprice}</s>
+                            </p>
+                            <!--箭头-->
+                            <div></div>
+                        </dd>
+                    </dl>`;
+                });
+                $('.main>div').eq(i).children('.list').html(html);
+            }
+        });
+    </script>
+</body>
+
+</html>

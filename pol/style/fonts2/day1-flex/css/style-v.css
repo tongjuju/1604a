@@ -1,0 +1,74 @@
+body,
+html,
+.wrap {
+    width: 100%;
+    height: 100%;
+}
+
+.wrap {
+    font-size: 0.34rem;
+}
+
+.list {
+    width: 100%;
+}
+
+.title {
+    display: flex;
+    padding: 0.2rem 0.1rem;
+    justify-content: space-between;
+}
+
+.list ul {
+    display: flex;
+    width: 100%;
+    overflow: auto;
+}
+
+.list ul li {
+    width: 2rem;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 0.1rem;
+}
+
+.list ul li span {
+    width: 100%;
+    display: block;
+    height: 2rem;
+    background: red;
+}
+
+.block {
+    padding: 0.1rem;
+}
+
+.table {
+    width: 100%;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 0.1rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0.1rem;
+}
+
+.table li {
+    width: 33.3%;
+    box-sizing: border-box;
+    text-align: center;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    border-right: 0.01rem solid #ccc;
+    border-bottom: 0.01rem solid #ccc;
+}
+
+.table li:nth-child(3n) {
+    border-right: none;
+}
+
+.table li:nth-child(7),
+.table li:nth-child(8),
+.table li:nth-child(9) {
+    border-bottom: none;
+}

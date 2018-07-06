@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style-list.css">
+    <script>
+        document.documentElement.style.fontSize = window.innerWidth / 750 * 100 + 'px';
+        //console.log();
+        // console.log(document.documentElement.clientWidth || document.body.clientWidth);
+    </script>
+</head>
+
+<body>
+    <div class="wrap">
+        <header class="header"><span></span>北京<span>编辑</span></header>
+        <nav class="nav">
+            <ul>
+                <li class="active">门票</li>
+                <li>酒店</li>
+                <li>团购</li>
+                <li>景点</li>
+            </ul>
+        </nav>
+        <main class="main">
+            <!--门票-->
+            <div class="active">
+                <div class="search">
+                    <input type="text">
+                </div>
+                <div class="list">
+                    <dl>
+                        <dt><img src=""></dt>
+                        <dd>
+                            <h3>蜡像馆蜡像馆蜡像馆蜡像馆蜡像馆蜡像馆蜡像馆蜡像馆蜡像馆蜡像馆</h3>
+                            <span>本周热卖</span>
+                            <span>已定1232分  5.0分</span>
+                            <p>
+                                <span>150元起</span>
+                                <s>170</s>
+                            </p>
+                            <!--箭头-->
+                            <div></div>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <!--酒店-->
+            <div>
+                <div class="search"></div>
+                <div class="list"></div>
+            </div>
+            <!--团购-->
+            <div>
+                <div class="search"></div>
+                <div class="list"></div>
+            </div>
+            <!--景点-->
+            <div>
+                <div class="search"></div>
+                <div class="list"></div>
+            </div>
+        </main>
+    </div>
+    <script src="../jquery/jquery-3.2.1.min.js"></script>
+    <script>
+        $('.nav li').on('click', function() {
+            var ind = $(this).index();
+            $(this).addClass('active').siblings().removeClass('active');
+            $('.main>div').eq(ind).addClass('active').siblings().removeClass('active');
+        });
+    </script>
+</body>
+
+</html>
